@@ -7,7 +7,7 @@ services:
   - type: web
     name: face-id-system
     runtime: docker
-    plan: starter
+    plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /api/health
@@ -26,4 +26,4 @@ services:
 # Optional: managed PostgreSQL database (persistent storage).
 # databases:
 #   - name: faceid-db
-#     plan: basic
+#     plan: free
