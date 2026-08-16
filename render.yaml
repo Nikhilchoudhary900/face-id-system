@@ -1,0 +1,29 @@
+# Render blueprint — deploy the Face Identification System as a single web service.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# One-click: create a new Blueprint from this file on Render.
+
+services:
+  - type: web
+    name: face-id-system
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      # Change this to a long random string in production!
+      - key: SECRET_KEY
+        generateValue: true
+      # Swap for a managed MySQL/Postgres URL if you want persistent data:
+      # - key: DATABASE_URL
+      #   fromDatabase:
+      #     name: faceid-db
+      #     property: connectionString
+      - key: FACE_THRESHOLD
+        value: "0.50"
+
+# Optional: managed PostgreSQL database (persistent storage).
+# databases:
+#   - name: faceid-db
+#     plan: basic

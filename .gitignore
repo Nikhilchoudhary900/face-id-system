@@ -174,3 +174,9 @@
 *.lz
 *.lzma
 *.iso
+
+# FaceID app runtime data
+backend/data/
+backend/static/log_frames/
+frontend/dist/
+frontend/.vite/
