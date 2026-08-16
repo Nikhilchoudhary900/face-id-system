@@ -208,3 +208,4 @@ docker run -d -p 8000:8000 -e SECRET_KEY='<random>' --name faceid face-id
 - Real-time inference runs on CPU (~3 frames/sec); faster on GPU-enabled hosts.
 - Camera access requires HTTPS or localhost (browser security). The preview environment provides an HTTPS URL.
 - The bundled sample image (`backend/static/samples/lena.jpg`) is the classic OpenCV test image, used only to seed demo data.
+# face-id-system
