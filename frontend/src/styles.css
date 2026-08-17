@@ -844,6 +844,16 @@ tr:hover td {
   }
 }
 
+/* camera shutter flash */
+@keyframes flashOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .badge-required {
   color: var(--red);
   margin-left: 4px;
