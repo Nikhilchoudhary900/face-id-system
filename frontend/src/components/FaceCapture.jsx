@@ -104,38 +104,36 @@ export default function FaceCapture({ samples, onChange, maxSamples = 6 }) {
 
       {error && <div className="alert error">{error}</div>}
 
-      {cameraOn && (
-        <div style={{ display: 'flex', gap: 12, margin: '10px 0', flexWrap: 'wrap' }}>
-          <div style={{ position: 'relative', width: 240 }}>
-            <video
-              ref={videoRef}
-              playsInline
-              muted
-              style={{ width: 240, borderRadius: 12, background: '#000', transform: 'scaleX(-1)', display: 'block' }}
+      <div style={{ display: cameraOn ? 'flex' : 'none', gap: 12, margin: '10px 0', flexWrap: 'wrap' }}>
+        <div style={{ position: 'relative', width: 240 }}>
+          <video
+            ref={videoRef}
+            playsInline
+            muted
+            style={{ width: 240, borderRadius: 12, background: '#000', transform: 'scaleX(-1)', display: 'block' }}
+          />
+          {flash && (
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(255,255,255,0.85)',
+                borderRadius: 12,
+                animation: 'flashOut 0.38s ease-out',
+              }}
             />
-            {flash && (
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'rgba(255,255,255,0.85)',
-                  borderRadius: 12,
-                  animation: 'flashOut 0.38s ease-out',
-                }}
-              />
-            )}
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, justifyContent: 'center' }}>
-            <button className="btn" onClick={capture} disabled={samples.length >= maxSamples}>
-              Capture Sample ({samples.length}/{maxSamples})
-            </button>
-            <label className="btn secondary">
-              <input type="file" accept="image/*" style={{ display: 'none' }} onChange={(e) => addFile(e.target.files[0])} />
-              Upload Photo
-            </label>
-          </div>
+          )}
         </div>
-      )}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, justifyContent: 'center' }}>
+          <button className="btn" onClick={capture} disabled={samples.length >= maxSamples}>
+            Capture Sample ({samples.length}/{maxSamples})
+          </button>
+          <label className="btn secondary">
+            <input type="file" accept="image/*" style={{ display: 'none' }} onChange={(e) => addFile(e.target.files[0])} />
+            Upload Photo
+          </label>
+        </div>
+      </div>
 
       <div className="flex" style={{ flexWrap: 'wrap', marginTop: 10 }}>
         {samples.map((s, i) => (
