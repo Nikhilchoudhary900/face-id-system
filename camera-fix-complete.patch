@@ -1,0 +1,32 @@
+diff --git a/frontend/src/components/FaceCapture.jsx b/frontend/src/components/FaceCapture.jsx
+index 7eabf0f..ac8ccf9 100644
+--- a/frontend/src/components/FaceCapture.jsx
++++ b/frontend/src/components/FaceCapture.jsx
+@@ -63,7 +63,7 @@ export default function FaceCapture({ samples, onChange, maxSamples = 6 }) {
+       canvas.height = video.videoHeight
+       canvas.getContext('2d').drawImage(video, 0, 0)
+       const dataUrl = canvasToDataUrl(canvas)
+-      onChange([...samples, dataUrl].slice(0, maxSamples))
++      onChange((prev) => [...prev, dataUrl].slice(0, maxSamples))
+       setLastSample(dataUrl)
+       setFlash(true)
+       setTimeout(() => setFlash(false), 380)
+@@ -78,7 +78,7 @@ export default function FaceCapture({ samples, onChange, maxSamples = 6 }) {
+     try {
+       const canvas = await imageFileToCanvas(file, 640)
+       const dataUrl = canvasToDataUrl(canvas)
+-      onChange([...samples, dataUrl].slice(0, maxSamples))
++      onChange((prev) => [...prev, dataUrl].slice(0, maxSamples))
+       setLastSample(dataUrl)
+     } catch (e) {
+       setError('Could not read image')
+@@ -86,8 +86,7 @@ export default function FaceCapture({ samples, onChange, maxSamples = 6 }) {
+   }
+ 
+   const remove = (i) => {
+-    const next = samples.filter((_, idx) => idx !== i)
+-    onChange(next)
++    onChange((prev) => prev.filter((_, idx) => idx !== i))
+   }
+ 
+   return (
